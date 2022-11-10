@@ -1,0 +1,28 @@
+version: '2'
+
+services:
+  mysqldb:
+    image: mysql:8
+    container_name: mysql8_container
+    environment:
+      MYSQL_ROOT_PASSWORD: yuyo_soft
+      MYSQL_DATABASE: testdb
+      TZ: 'America/Vancouver'
+    volumes:
+      - ./docker/db/data:/var/lib/mysql  
+      - ./docker/db/my.cnf:/etc/mysql/conf.d/my.cnf
+      - ./docker/db/sql:/docker-entrypoint-initdb.d
+    ports:
+      - "3306:3306"
+    command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    depends_on:
+      - mysqldb
+    environment:
+      - PMA_ARBITRARY=1
+      - PMA_HOSTS='mysqldb'
+    ports:
+      - "3000:80"
+    volumes:
+      - ./docker/phpmyadmin/sessions:/sessions
