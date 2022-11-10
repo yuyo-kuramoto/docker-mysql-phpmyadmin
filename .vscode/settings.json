@@ -1,0 +1,6 @@
+{
+  "typescript.tsdk": "/server/node_modules/typescript/lib",
+  "triggerTaskOnSave.tasks": {
+    "restart nodejs":["src/**/*"]
+  }
+}

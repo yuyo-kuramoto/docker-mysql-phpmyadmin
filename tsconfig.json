@@ -1,0 +1,8 @@
+{
+  "extends":"@tsconfig/node16/tsconfig.json",
+  "complierOptions":{
+    "lib":["ESNext"],
+    "outDir":"dist"
+  },
+  "include":["src"]
+}
